@@ -5,16 +5,16 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true
         },
         url: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING(2048) // Adjusted length for URL if needed
         },
         title: {
-            type: DataTypes.STRING(100)
+            type: DataTypes.STRING(255)
         },
         author: {
             type: DataTypes.STRING(100)
         },
         ImageURL: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING(2048) // Adjusted length for ImageURL if needed
         },
         rating: {
             type: DataTypes.FLOAT

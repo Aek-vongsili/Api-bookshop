@@ -1,6 +1,6 @@
 const dbConfig = require("../config/dbConfig");
 const { Sequelize, DataTypes } = require("sequelize");
-const fs = require('fs')
+const fs = require("fs");
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
   dialect: dbConfig.dialect,
@@ -13,9 +13,12 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     idle: dbConfig.pool.idle,
   },
   dialectOptions: {
-    ssl: { ca: fs.readFileSync("./cert/lead-amount-6740-ssl-public-cert.cert") },
-    connectTimeout: 60000
+    // ssl: {
+    //   ca: fs.readFileSync("./cert/lead-amount-6740-ssl-public-cert.cert"),
+    // },
+    connectTimeout: 60000,
   },
+  logging: console.log,
 });
 
 sequelize
