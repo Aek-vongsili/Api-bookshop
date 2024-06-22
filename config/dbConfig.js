@@ -1,7 +1,7 @@
 module.exports = {
-    HOST: 'localhost',
-    USER: 'root',
-    PASSWORD: 'Qhod1234',
+    HOST: 'SG-lead-amount-6740-9076-mysql-master.servers.mongodirector.com',
+    USER: 'aek',
+    PASSWORD: 'Qhod1234@@',
     DB: 'bookshop',
     dialect: 'mysql',
     pool: {
