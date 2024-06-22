@@ -13,12 +13,11 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     idle: dbConfig.pool.idle,
   },
   dialectOptions: {
-    // ssl: {
-    //   ca: fs.readFileSync("./cert/lead-amount-6740-ssl-public-cert.cert"),
-    // },
-    connectTimeout: 60000,
+    ssl: {
+      ca: fs.readFileSync("./cert/lead-amount-6740-ssl-public-cert.cert"),
+    },
+    connectTimeout: 120000,
   },
-  logging: console.log,
 });
 
 sequelize
