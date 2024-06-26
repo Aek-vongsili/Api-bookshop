@@ -3,6 +3,7 @@ const { Sequelize, DataTypes } = require("sequelize");
 const fs = require("fs");
 const path = require('path');
 const certPath = path.resolve(__dirname, '../cert/lead-amount-6740-ssl-public-cert.cert');
+require('mysql2');
 console.log(certPath)
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
