@@ -8,6 +8,7 @@ console.log(certPath)
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
   dialect: dbConfig.dialect,
+  dialectModule :require('mysql2'),
   port: 3306,
   operatorsAliases: false,
   pool: {
