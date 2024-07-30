@@ -1,7 +1,7 @@
 const multer = require("multer");
 const db = require("../models");
 const { v4: uuidv4 } = require('uuid');
-
+const { Op } = require('sequelize'); 
 const uuid1 = uuidv4();
 const uuid2 = uuidv4();
 const Order = db.orders
@@ -80,36 +80,51 @@ const addExchangeRate = async (req,res) => {
    
     
 }
-
 const getOrders = async (req, res) => {
     try {
-        const { user } = req
+        const { user } = req;
+
+        // Fetch user orders
         const userOrder = await User.findOne({
             include: [{
                 model: Order,
                 as: "order"
             }],
             where: { user_id: user.user_id }
-        })
-        const { order } = userOrder
-        const orderIds = order.map((order) => order.order_id);
+        });
 
+        if (!userOrder) {
+            return res.status(404).json({ message: 'No orders found for this user.' });
+        }
+
+        const { order } = userOrder;
+        const orderIds = order.map(order => order.order_id);
+
+        // Debugging: log the orderIds array
+        console.log(orderIds);
+
+        // Fetch orders with related payments and order details
         const orderPayment = await Order.findAll({
-            where: { order_id: orderIds, order_pay_status: req.body.status },
+            where: {
+                order_id: {
+                    [Op.in]: orderIds
+                },
+                order_pay_status: req.body.status
+            },
             include: [{
                 model: Payment,
                 as: "payments"
             }, {
                 model: OrderDetail,
                 as: "order_detail"
-            }],
+            }]
+        });
 
-        })
-        res.status(201).json(orderPayment)
+        res.status(200).json(orderPayment);
+    } catch (err) {
+        console.error('Error fetching orders:', err);
+        res.status(500).json({ message: 'Internal server error.' });
     }
-    catch (err) {
-        res.status(400).json({ message: err })
-    }
-}
+};
 
 module.exports = { createOrderWithDetailsAndPayment, getOrders, addExchangeRate }

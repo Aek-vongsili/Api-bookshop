@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         payment_status: {
             type: DataTypes.STRING(10),
-            defaultValue: "wating"
+            defaultValue: "waiting"
         },
         order_id: {
             type: DataTypes.INTEGER,
