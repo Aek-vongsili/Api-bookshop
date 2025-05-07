@@ -5,11 +5,11 @@ module.exports = {
     DB: 'sql12777195',
     dialect: 'mysql',
     pool: {
-        max: 10,
+        max: 3,  // Further reduced connection pool
         min: 0,
-        acquire: 30000,
+        acquire: 90000,  // Significantly increased
         idle: 10000
-    }
+    },
 }
 // module.exports = {
 //     HOST: 'localhost',

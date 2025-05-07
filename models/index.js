@@ -11,7 +11,6 @@ const certPath = path.resolve(
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
   dialect: dbConfig.dialect,
-  dialectModule: mysql2,
   port: 3306,
   operatorsAliases: false,
   pool: {
@@ -20,12 +19,17 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     acquire: dbConfig.pool.acquire,
     idle: dbConfig.pool.idle,
   },
-  // dialectOptions: {
-  //   ssl: {
-  //     ca: fs.readFileSync(certPath),
-  //   },
-  //   connectTimeout: 120000,
-  // },
+  dialectOptions: {
+    connectTimeout: 90000,  // 90 seconds
+    // For some hosting environments, forcing IPv4 helps
+    socketPath: undefined,
+    // Additional options that might help with free database hosting
+    ssl: null,
+    keepAlive: true
+  },
+  retry: {
+    max: 5  // Number of connection retry attempts
+  }
 });
 
 sequelize
