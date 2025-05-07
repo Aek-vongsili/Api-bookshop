@@ -1,8 +1,8 @@
 module.exports = {
-    HOST: 'SG-spot-gecko-8514-9668-mysql-master.servers.mongodirector.com',
-    USER: 'sgroot',
-    PASSWORD: 'u8P.ovUT0HRoSQbR',
-    DB: 'bookshop',
+    HOST: 'sql12.freesqldatabase.com',
+    USER: 'sql12777195',
+    PASSWORD: 'zCMqJ2ZLvK',
+    DB: 'sql12777195',
     dialect: 'mysql',
     pool: {
         max: 10,

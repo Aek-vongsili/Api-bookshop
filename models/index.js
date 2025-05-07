@@ -20,12 +20,12 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     acquire: dbConfig.pool.acquire,
     idle: dbConfig.pool.idle,
   },
-  dialectOptions: {
-    ssl: {
-      ca: fs.readFileSync(certPath),
-    },
-    connectTimeout: 120000,
-  },
+  // dialectOptions: {
+  //   ssl: {
+  //     ca: fs.readFileSync(certPath),
+  //   },
+  //   connectTimeout: 120000,
+  // },
 });
 
 sequelize
